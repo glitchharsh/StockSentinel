@@ -7,6 +7,10 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>Top Gainers</title>
     <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
@@ -46,31 +50,29 @@
         </tr>
         {% for i in range(10) %}
         <tr>
-            <td>{{ stocks_1d[i]['companyShortName'] }}</td>
-            <td>{{ stocks_1d[i]['percentChange'] }}%</td>
-            <td>{{ stocks_1w[i]['companyShortName'] }}</td>
-            <td>{{ stocks_1w[i]['percentChange'] }}%</td>
-            <td>{{ stocks_1m[i]['companyShortName'] }}</td>
-            <td>{{ stocks_1m[i]['percentChange'] }}%</td>
-            <td>{{ stocks_3m[i]['companyShortName'] }}</td>
-            <td>{{ stocks_3m[i]['percentChange'] }}%</td>
+            <td>{{ stocks_1d[i]['company'] }}</td>
+            <td>{{ stocks_1d[i]['change'] }}%</td>
+            <td>{{ stocks_1w[i]['company'] }}</td>
+            <td>{{ stocks_1w[i]['change'] }}%</td>
+            <td>{{ stocks_1m[i]['company'] }}</td>
+            <td>{{ stocks_1m[i]['change'] }}%</td>
+            <td>{{ stocks_3m[i]['company'] }}</td>
+            <td>{{ stocks_3m[i]['change'] }}%</td>
         </tr>
         {% endfor %}
     </table>
+    <h2>Frequencies</h2>
     <table>
-        <tr>
-            <th colspan="3">Company Frequencies</th>
-        </tr>
         <tr>
             <th colspan="1">Company</th>
             <th colspan="1">Score</th>
             <th colspan="1">Frequency</th>
         </tr>
-        {% for company, score in company_scores.items() %}
+        {% for company, data in company_scores.items() %}
         <tr>
             <td>{{ company }}</td>
-            <td>{{ score }}</td>
-            <td>{{ company_counts[company] }}</td>
+            <td>{{ data['score'] }}</td>
+            <td>{{ data['frequency'] }}</td>
         </tr>
         {% endfor %}
     </table>
