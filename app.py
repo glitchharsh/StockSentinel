@@ -105,7 +105,7 @@ def fetch():
 @app.route('/')
 def index():
     offset = int(request.args.get('offset', 0))
-    target_date = datetime.now().date() - timedelta(days=offset) + timedelta(hours=5, minutes=30)
+    target_date = datetime.now().date() - timedelta(days=offset)
 
     try:
         stocks_1d = StockData.query.filter_by(date=target_date, duration='1d').first().data
