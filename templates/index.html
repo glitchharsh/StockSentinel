@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Top Gainers</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Top Gainers</h1>
+    <h2>{{ current_date }}</h2>
+    <table>
+        <tr>
+            <th colspan="2">1 Day</th>
+            <th colspan="2">1 Week</th>
+            <th colspan="2">1 Month</th>
+            <th colspan="2">3 Months</th>
+        </tr>
+        <tr>
+            <th>Company</th>
+            <th>Percent Change</th>
+            <th>Company</th>
+            <th>Percent Change</th>
+            <th>Company</th>
+            <th>Percent Change</th>
+            <th>Company</th>
+            <th>Percent Change</th>
+        </tr>
+        {% for i in range(10) %}
+        <tr>
+            <td>{{ stocks_1d[i]['companyShortName'] }}</td>
+            <td>{{ stocks_1d[i]['percentChange'] }}%</td>
+            <td>{{ stocks_1w[i]['companyShortName'] }}</td>
+            <td>{{ stocks_1w[i]['percentChange'] }}%</td>
+            <td>{{ stocks_1m[i]['companyShortName'] }}</td>
+            <td>{{ stocks_1m[i]['percentChange'] }}%</td>
+            <td>{{ stocks_3m[i]['companyShortName'] }}</td>
+            <td>{{ stocks_3m[i]['percentChange'] }}%</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <table>
+        <tr>
+            <th colspan="3">Company Frequencies</th>
+        </tr>
+        <tr>
+            <th colspan="1">Company</th>
+            <th colspan="1">Score</th>
+            <th colspan="1">Frequency</th>
+        </tr>
+        {% for company, score in company_scores.items() %}
+        <tr>
+            <td>{{ company }}</td>
+            <td>{{ score }}</td>
+            <td>{{ company_counts[company] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
