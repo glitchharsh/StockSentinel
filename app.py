@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ypfolalb:x9TrOZUFmUAV6qXuWgTRxo-uc-1DzJH0@tiny.db.elephantsql.com/ypfolalb'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('CONNECTION_STRING')
 db = SQLAlchemy(app)
 
 class StockData(db.Model):
